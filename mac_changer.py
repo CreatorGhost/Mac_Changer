@@ -33,21 +33,22 @@ print ('''
 |  `----.|  |  |  |  /  _____  \  |  |\   | |  |__| | |  |____ |  |\  \----.
  \______||__|  |__| /__/     \__\ |__| \__|  \______| |_______|| _| `._____|
 ''')
-(opn, arg) = get_mac()
-intr = opn.intr
-mac = opn.mac
-current=check_mac(intr)
-print ("[+] The current mac address is "+current.group(0))
-ck=mac
-print("[+] Changing mac of " + intr + " to " + mac)
-change_mac(intr,mac)
-(opn, arg) = get_mac()
-intr = opn.intr
-mac = opn.mac
-current=check_mac(intr)
-if ck == mac:
-    print ("[+] Mac Successfully changed ...")
-else:
-    print ("[-] Error Changing The MAC....")
+try :
+    (opn, arg) = get_mac()
+    intr = opn.intr
+    mac = opn.mac
+    current = check_mac(intr)
+    print ("[+] The current mac address is " + current.group(0))
+    ck = mac
+    print("[+] Changing mac of " + intr + " to " + mac)
+    change_mac(intr, mac)
+    current = check_mac(intr)
+    newmac = current.group(0)
+    if ck == newmac:
+        print ("[+] Mac Successfully changed ...")
+    else:
+        print ("[-] Error Changing The MAC....")
 
-print ("[+] The current mac address is "+current.group(0))
+    print ("[+] The current mac address is " + newmac)
+except Exception:
+    print ("[+] Usage 'python mac_changer.py --help '")
